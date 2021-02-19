@@ -1,0 +1,10 @@
+---
+smtp:
+  host: "put smtp host here"
+  port: "put smtp port here"
+  user: "put your user here"
+  pass: 'put your pass here'
+
+mail:
+  from: "put mail from here"
+  reply: "put reply-to here"

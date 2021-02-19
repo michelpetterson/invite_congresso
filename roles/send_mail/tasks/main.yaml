@@ -1,0 +1,24 @@
+---
+- name: Copying template file...
+  shell: >
+    cp roles/send_mail/templates/mail.j4 roles/send_mail/templates/mail.j4.generated
+
+- name: Creating template...
+  shell: >
+    sed -i -e "s/_sala_/{{ item['value']['sala'] }}/" -e "s/_titulo_/{{ item['value']['titulo'] }}/" -e "s/_proponente_/{{ item['value']['proponente'] }}/" -e "s/_hora_/{{ item['value']['hora'] }}/" -e "s/_data_/{{ item['value']['data'] }}/" -e "s/_sy_url_/{{ item['value']['sy_url'] }}/" -e "s/_participantes_/{{ item['value']['participantes'] }}/" roles/send_mail/templates/mail.j4.generated
+
+- name: Sending invite email...
+  mail:
+    host: "{{ smtp['host'] }}"
+    port: "{{ smtp['port'] }}"
+    username: "{{ smtp['user'] }}"
+    password: "{{ smtp['pass'] }}"
+    from: "{{ mail['from'] }}"
+    to: "{{ item['value']['proponente'] }} {{ item['value']['email_proponente'] }}"
+    subject: Informações de acesso e instruções para o Congresso Virtual UFBA 2021
+    subtype: html
+    body: "{{ lookup('file', 'roles/send_mail/templates/mail.j4.generated') }}"
+    headers:
+    - Reply-To=ti.congresso.ufba.br
+    charset: utf-8
+  delegate_to: localhost
