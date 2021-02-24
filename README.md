@@ -18,7 +18,7 @@ docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansi
 
 or
 ```
-docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-con    gresso/data.csv michelpetterson/congresso_invite_sender:1.5 ansible-playbook congresso_online_invite.yaml
+docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-congresso/data.csv michelpetterson/congresso_invite_sender:1.5 ansible-playbook congresso_online_invite.yaml
 ```
 
 * The command above must be executed in current directory from data.csv.
