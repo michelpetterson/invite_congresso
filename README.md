@@ -1,6 +1,6 @@
 ## Steps ##
 
-##* Using Ansible ##
+## Using Ansible ##
 
 1. Clone repository
 2. Change parameters in vars.yaml file
@@ -9,7 +9,7 @@
    ansible-playbook  congresso_online_invite.yaml
 5. Go have a coffe... :-D
 
-##* Using Docker Image ##
+## Using Docker Image ##
 
 1. Pull and run the container using the cmmand:
 ```
