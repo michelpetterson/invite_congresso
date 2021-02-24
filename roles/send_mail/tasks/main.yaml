@@ -3,9 +3,47 @@
   shell: >
     cp roles/send_mail/templates/mail.j4 roles/send_mail/templates/mail.j4.generated
 
-- name: Creating template...
-  shell: >
-    sed -i -e "s/_sala_/{{ item['value']['sala'] }}/" -e "s/_titulo_/{{ item['value']['titulo'] }}/" -e "s/_proponente_/{{ item['value']['proponente'] }}/" -e "s/_hora_/{{ item['value']['hora'] }}/" -e "s/_data_/{{ item['value']['data'] }}/" -e "s/_sy_url_/{{ item['value']['sy_url'] }}/" -e "s/_participantes_/{{ item['value']['participantes'] }}/" roles/send_mail/templates/mail.j4.generated
+- name: Building...STEP 1/7
+  replace:
+    path: roles/send_mail/templates/mail.j4.generated
+    regexp: '_sala_'
+    replace: "{{ item['value']['sala'] }}"
+
+- name: Building...STEP 2/7
+  replace:
+    path: roles/send_mail/templates/mail.j4.generated
+    regexp: '_titulo_'
+    replace: "{{ item['value']['titulo'] }}"
+
+- name: Building...STEP 3/7
+  replace:
+    path: roles/send_mail/templates/mail.j4.generated
+    regexp: '_proponente_'
+    replace: "{{ item['value']['proponente'] }}"
+
+- name: Building...STEP 4/7
+  replace:
+    path: roles/send_mail/templates/mail.j4.generated
+    regexp: '_hora_'
+    replace: "{{ item['value']['hora'] }}"
+
+- name: Building...STEP 5/7
+  replace:
+    path: roles/send_mail/templates/mail.j4.generated
+    regexp: '_data_'
+    replace: "{{ item['value']['data'] }}"
+
+- name: Building...STEP 6/7
+  replace:
+    path: roles/send_mail/templates/mail.j4.generated
+    regexp: '_sy_url_'
+    replace: "{{ item['value']['sy_url'] }}"
+
+- name: Building...STEP 7/7
+  replace:
+    path: roles/send_mail/templates/mail.j4.generated
+    regexp: '_participantes_'
+    replace: "{{ item['value']['participantes'] }}"
 
 - name: Sending invite email...
   mail:
@@ -15,10 +53,13 @@
     password: "{{ smtp['pass'] }}"
     from: "{{ mail['from'] }}"
     to: "{{ item['value']['proponente'] }} {{ item['value']['email_proponente'] }}"
-    subject: Informações de acesso e instruções para o Congresso Virtual UFBA 2021
+    subject: Informações de acesso e instruções para o Congresso Virtual UFBA 2021 - "{{ '%Y-%m-%d'|strftime(ansible_date_time.epoch|int + 86400) }}"
     subtype: html
     body: "{{ lookup('file', 'roles/send_mail/templates/mail.j4.generated') }}"
     headers:
     - Reply-To=ti.congresso.ufba.br
     charset: utf-8
   delegate_to: localhost
+
+- debug:
+    msg: "Mail Sent to: {{ item['value']['email_proponente'] }}"

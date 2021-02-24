@@ -1,6 +1,6 @@
 - hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
 
   vars_files:
     - vars.yaml
@@ -9,7 +9,7 @@
 
     - name: Reading CSV file...
       read_csv:
-        key: proponente
+        key: titulo
         path: data.csv
         fieldnames: proponente,email_proponente,sala,data,hora,titulo,participantes,sy_url
         delimiter: ';'

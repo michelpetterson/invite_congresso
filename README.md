@@ -9,4 +9,11 @@
 
 * Using Docker Image
 
-1. Pull and run the container using the cmmand: docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-congresso/data.csv michelpetterson/congresso_invite_sender:1.0 /bin/bash
+1. Pull and run the container using the cmmand: docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-congresso/data.csv michelpetterson/congresso_invite_sender:1.5 /bin/bash
+
+or
+
+docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-con    gresso/data.csv michelpetterson/congresso_invite_sender:1.5 ansible-playbook congresso_online_invite.yaml
+
+* The command above must be executed in current directory from data.csv.
+* Need edit vars.yaml and change smtp parameters.
