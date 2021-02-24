@@ -9,7 +9,9 @@
 
 * Using Docker Image
 
-1. Pull and run the container using the cmmand:\n docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-congresso/data.csv michelpetterson/congresso_invite_sender:1.5 /bin/bash or
+1. Pull and run the container using the cmmand:<br /> docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-congresso/data.csv michelpetterson/congresso_invite_sender:1.5 /bin/bash 
+
+or<br />
 
 docker container run -ti --mount type=bind,source="$(pwd)/data.csv",target=/ansible-con    gresso/data.csv michelpetterson/congresso_invite_sender:1.5 ansible-playbook congresso_online_invite.yaml
 
