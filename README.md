@@ -1,5 +1,7 @@
 ## Steps ##
 
+* Using Ansible
+
 1. Clone repository
 2. Change parameters in vars.yaml file
 3. Populate data.csv with your informations.
